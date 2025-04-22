@@ -1,0 +1,122 @@
+/* --- style-menu-button.css --- */
+
+/* Popup Menu - Kế thừa từ .modal nhưng có thể ghi đè */
+#menu-popup {
+    /* Các thuộc tính kế thừa từ .modal như position, z-index, background-color(rgba) */
+    /* Bạn có thể thêm hoặc ghi đè nếu cần hiệu ứng khác */
+}
+
+/* Nội dung Popup Menu */
+.menu-popup-content {
+    background-color: #f8f9fa; /* Màu nền sáng hơn chút */
+    margin: 15% auto; /* Căn giữa và cách top */
+    padding: 25px 30px;
+    border: 1px solid #dee2e6;
+    width: 80%;
+    max-width: 350px; /* Giới hạn chiều rộng */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    animation: menuSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Animation riêng nếu muốn */
+}
+
+@keyframes menuSlideIn {
+    from { transform: translateY(-30px) scale(0.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+.menu-popup-content h2 {
+    text-align: center;
+    color: #495057; /* Màu tối nhẹ */
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+/* Nút đóng trong Menu Popup */
+.menu-popup-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #adb5bd; /* Xám nhạt hơn */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-popup-content .close-button:hover {
+    color: #495057; /* Xám đậm hơn khi hover */
+    transform: scale(1.1);
+}
+
+/* Container chứa các nút menu */
+.menu-buttons {
+    display: flex;
+    flex-direction: column; /* Xếp chồng nút */
+    gap: 12px; /* Khoảng cách giữa các nút */
+    width: 100%;
+    align-items: center; /* Căn nút giữa theo chiều ngang */
+}
+
+/* Kiểu nút chung trong menu */
+.menu-action-button {
+    background-color: #6c757d; /* Màu xám */
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block; /* Để chiếm toàn bộ chiều rộng container cha (nếu cần) */
+    width: 90%; /* Chiếm phần lớn chiều rộng */
+    max-width: 280px; /* Giới hạn */
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.menu-action-button:hover:not(:disabled) {
+    background-color: #5a6268; /* Xám đậm hơn */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.menu-action-button:active:not(:disabled) {
+    background-color: #495057;
+    transform: scale(0.99) translateY(0px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-action-button:disabled {
+    background-color: #ced4da;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #6c757d;
+}
+
+
+/* Responsive nếu cần */
+@media (max-width: 600px) {
+    .menu-popup-content {
+        width: 90%;
+        padding: 20px;
+        margin: 20% auto;
+    }
+    .menu-popup-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    .menu-action-button {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+        width: 95%;
+    }
+}

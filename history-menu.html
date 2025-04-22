@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Sử Vườn Cây Hạnh Phúc</title>
+    <!-- Liên kết đến tệp CSS bên ngoài -->
+    <link rel="stylesheet" href="style-history-menu.css">
+    <style>
+        /* CSS nội bộ cơ bản để đảm bảo trang có cấu trúc tối thiểu nếu CSS ngoài lỗi */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff; /* AliceBlue giống trang game */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex-grow: 1; /* Cho phép container phát triển */
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #2e8b57; /* SeaGreen */
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        .back-button, .clear-button { /* Kiểu chung cho nút */
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .back-button {
+            background-color: #6c757d; /* Xám */
+            color: white;
+        }
+        .back-button:hover {
+            background-color: #5a6268;
+            transform: scale(1.03);
+        }
+         .clear-button {
+             background-color: #dc3545; /* Đỏ */
+             color: white;
+             margin-left: 10px; /* Khoảng cách giữa nút Quay lại và Xóa */
+         }
+         .clear-button:hover {
+             background-color: #c82333;
+             transform: scale(1.03);
+         }
+         .clear-button:disabled {
+             background-color: #f8d7da;
+             color: #721c24;
+             cursor: not-allowed;
+             transform: none;
+         }
+        #history-list-container {
+            flex-grow: 1; /* Cho phép danh sách phát triển và chiếm không gian */
+            overflow-y: auto; /* Cho phép cuộn nếu danh sách quá dài */
+            padding-right: 10px; /* Tránh thanh cuộn che nội dung */
+            margin-bottom: 10px; /* Khoảng cách dưới cùng */
+        }
+        #history-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .history-entry {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: flex-start; /* Căn chỉnh các mục con theo chiều dọc */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .history-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0; /* Không co lại */
+            width: 25px; /* Chiều rộng cố định cho icon */
+            text-align: center;
+        }
+        .history-details-time {
+            flex-grow: 1; /* Cho phép phần này chiếm không gian */
+        }
+        .history-time {
+            font-size: 0.75rem;
+            color: #6c757d;
+            display: block; /* Hiển thị trên dòng riêng */
+            margin-bottom: 3px;
+        }
+        .history-details {
+            color: #495057;
+        }
+        #history-message {
+            text-align: center;
+            color: #6c757d;
+            padding: 30px;
+            font-style: italic;
+        }
+        /* Responsive nhỏ */
+        @media (max-width: 600px) {
+            .container { margin: 10px; padding: 15px; }
+            .header h1 { font-size: 1.5rem; }
+            .back-button, .clear-button { padding: 6px 12px; font-size: 0.85rem; }
+            .history-entry { padding: 8px 10px; font-size: 0.85rem; gap: 8px; }
+            .history-icon { font-size: 1.1rem; width: 20px;}
+            .history-time { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📜 Lịch Sử Hoạt Động</h1>
+            <div>
+                <button class="back-button" onclick="window.location.href='Farm5.html'">Quay Lại Vườn</button>
+                <button id="clear-history-btn" class="clear-button">Xóa Lịch Sử</button>
+            </div>
+        </div>
+
+        <div id="history-list-container">
+            <div id="history-items">
+                <!-- Lịch sử sẽ được chèn vào đây bằng JavaScript -->
+            </div>
+            <p id="history-message">Đang tải lịch sử...</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const historyItemsContainer = document.getElementById('history-items');
+            const historyMessage = document.getElementById('history-message');
+            const clearHistoryBtn = document.getElementById('clear-history-btn');
+
+            // --- Lấy Khóa Lưu Trữ ---
+            // !!! Quan trọng: Đảm bảo khóa này KHỚP với khóa trong Farm5.html !!!
+            const HISTORY_SAVE_KEY = 'vuonCayHanhPhuc_v9.3_History';
+
+            // --- Hàm Định Dạng Thời Gian ---
+            function formatTimestamp(timestamp) {
+                if (!timestamp || isNaN(timestamp)) return 'Thời gian không xác định';
+                try {
+                    const date = new Date(timestamp);
+                    // Định dạng đầy đủ: Ngày/Tháng/Năm Giờ:Phút:Giây
+                    return date.toLocaleString('vi-VN', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false // Dùng 24h
+                    });
+                } catch (e) {
+                    console.error("Lỗi định dạng timestamp:", e);
+                    return 'Lỗi thời gian';
+                }
+            }
+
+            // --- Hàm Hiển Thị Lịch Sử ---
+            function displayHistory() {
+                historyItemsContainer.innerHTML = ''; // Xóa nội dung cũ
+                let historyData = [];
+                try {
+                    const savedHistory = localStorage.getItem(HISTORY_SAVE_KEY);
+                    if (savedHistory) {
+                        historyData = JSON.parse(savedHistory);
+                        // Đảm bảo historyData là một mảng
+                        if (!Array.isArray(historyData)) {
+                            console.warn("Dữ liệu lịch sử không phải là mảng, đặt lại thành rỗng.");
+                            historyData = [];
+                        }
+                    } else {
+                        console.log("Không tìm thấy dữ liệu lịch sử trong localStorage.");
+                    }
+                } catch (error) {
+                    console.error("Lỗi khi đọc hoặc phân tích lịch sử từ localStorage:", error);
+                    historyMessage.textContent = 'Lỗi khi tải lịch sử.';
+                    historyMessage.style.display = 'block';
+                    historyItemsContainer.style.display = 'none';
+                    clearHistoryBtn.disabled = true; // Vô hiệu hóa nút xóa nếu có lỗi
+                    return;
+                }
+
+                if (historyData.length === 0) {
+                    historyMessage.textContent = 'Chưa có hoạt động nào được ghi lại.';
+                    historyMessage.style.display = 'block';
+                    historyItemsContainer.style.display = 'none';
+                    clearHistoryBtn.disabled = true; // Vô hiệu hóa nút xóa khi không có lịch sử
+                } else {
+                    historyMessage.style.display = 'none';
+                    historyItemsContainer.style.display = 'block';
+                    clearHistoryBtn.disabled = false; // Kích hoạt nút xóa
+
+                    // Lặp qua mảng lịch sử (đã được sắp xếp mới nhất lên trước trong Farm5.html)
+                    historyData.forEach(entry => {
+                        const entryDiv = document.createElement('div');
+                        entryDiv.classList.add('history-entry');
+                        // Thêm data-type để có thể tùy chỉnh CSS nếu cần
+                        entryDiv.dataset.type = entry.type || 'unknown';
+
+                        entryDiv.innerHTML = `
+                            <span class="history-icon" title="Loại: ${entry.type || 'N/A'}">${entry.icon || '❓'}</span>
+                            <div class="history-details-time">
+                                <span class="history-time">${formatTimestamp(entry.timestamp)}</span>
+                                <span class="history-details">${entry.details || 'Không có chi tiết'}</span>
+                            </div>
+                        `;
+                        historyItemsContainer.appendChild(entryDiv);
+                    });
+                }
+            }
+
+            // --- Xử lý nút Xóa Lịch Sử ---
+            if (clearHistoryBtn) {
+                clearHistoryBtn.addEventListener('click', () => {
+                    if (confirm("Bạn có chắc chắn muốn xóa toàn bộ lịch sử hoạt động không? Hành động này không thể hoàn tác!")) {
+                        try {
+                            localStorage.removeItem(HISTORY_SAVE_KEY);
+                            console.log("Lịch sử đã được xóa khỏi localStorage.");
+                            // Cập nhật lại giao diện ngay lập tức
+                            displayHistory();
+                            alert("Đã xóa lịch sử thành công!");
+                        } catch (error) {
+                            console.error("Lỗi khi xóa lịch sử khỏi localStorage:", error);
+                            alert("Đã xảy ra lỗi khi xóa lịch sử.");
+                        }
+                    }
+                });
+            } else {
+                console.warn("Không tìm thấy nút xóa lịch sử.");
+            }
+
+            // --- Tải và Hiển Thị Lịch Sử Ban Đầu ---
+            displayHistory();
+        });
+    </script>
+</body>
+</html>

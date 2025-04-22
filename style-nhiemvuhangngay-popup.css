@@ -1,0 +1,193 @@
+/* --- style-nhiemvuhangngay-popup.css --- */
+
+/* --- Kiểu Cơ Bản Modal --- */
+.daily-quest-popup-content {
+    background-color: #fdfdfd;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    max-width: 480px; /* Có thể điều chỉnh nếu cần */
+    width: 92%;
+    margin: 7% auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+}
+
+/* --- Tiêu Đề --- */
+.daily-quest-popup-content h2 {
+    color: #6d4c41;
+    font-size: 1.7rem;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px dashed #a1887f;
+    font-weight: 600;
+}
+
+/* --- Nút Đóng --- */
+.daily-quest-popup-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+/* Ghi đè hiệu ứng hover/focus của nút đóng */
+#daily-quest-popup .daily-quest-popup-content .close-button:hover,
+#daily-quest-popup .daily-quest-popup-content .close-button:focus {
+    transform: none;
+    color: #aaa;
+}
+
+
+/* --- Danh Sách Nhiệm Vụ --- */
+#daily-quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 15px 5px;
+    margin-top: 10px;
+    border-top: 1px solid #eee;
+    min-height: 100px;
+    scrollbar-width: thin;
+    scrollbar-color: #a1887f #f5f5f5;
+}
+#daily-quest-list::-webkit-scrollbar { width: 8px; }
+#daily-quest-list::-webkit-scrollbar-track { background: #f5f5f5; border-radius: 4px; }
+#daily-quest-list::-webkit-scrollbar-thumb { background-color: #a1887f; border-radius: 4px; border: 2px solid #f5f5f5; }
+#daily-quest-list::-webkit-scrollbar-thumb:hover { background-color: #8d6e63; }
+
+/* --- Kiểu Mục Nhiệm Vụ --- */
+.quest-item {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    flex-wrap: wrap; /* Cho phép nút xuống dòng nếu cần */
+    justify-content: space-between;
+    align-items: center; /* <<< Đổi lại thành căn giữa */
+    gap: 10px 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s ease;
+}
+.quest-item:hover { box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
+
+.quest-info {
+    flex-grow: 1; /* Cho phép chiếm không gian thừa */
+    flex-basis: 0; /* Bắt đầu từ 0 để tính toán co giãn */
+    min-width: 0; /* <<< THÊM: Ngăn nội dung dài đẩy nút đi */
+}
+.quest-title {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #5d4037;
+    margin-bottom: 6px;
+    line-height: 1.3;
+}
+
+/* ---- TIẾN TRÌNH ---- */
+.quest-progress {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+.quest-progress-text {
+    font-size: 0.9rem;
+    color: #2e7d32;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+}
+/* Container thanh xám */
+.quest-item .quest-progress > div:first-of-type {
+   background-color: #e0e0e0;
+   border-radius: 4px;
+   height: 8px;
+   overflow: hidden;
+   width: 100%;
+}
+/* Thanh fill xanh */
+.quest-item .quest-progress > div > div {
+   background-color: #4caf50;
+   height: 100%;
+   transition: width 0.3s ease;
+}
+/* ---- KẾT THÚC TIẾN TRÌNH ---- */
+
+.quest-reward {
+    font-size: 0.9rem;
+    color: #5d4037;
+    margin-top: 0;
+    width: 100%;
+}
+.quest-reward strong { color: #d4af37; font-weight: bold; }
+
+/* ---- NÚT NHẬN THƯỞNG ---- */
+.claim-button {
+    background-color: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+    min-width: 105px; /* Giữ nguyên hoặc điều chỉnh */
+    flex-shrink: 0;   /* Giữ nguyên */
+    flex-basis: auto;
+    /* align-self: center; */ /* Bỏ align-self nếu quest-item là align-items: center */
+    margin-left: 10px; /* Giữ khoảng cách */
+}
+.claim-button:hover:not(:disabled) { background-color: #f57c00; transform: scale(1.03); }
+.claim-button:disabled { background-color: #bdbdbd; cursor: not-allowed; opacity: 0.7; transform: none; }
+/* ---- KẾT THÚC NÚT NHẬN THƯỞNG ---- */
+
+/* Kiểu khi nhiệm vụ đã hoàn thành */
+.quest-item.completed { background-color: #e8f5e9; border-color: #a5d6a7; }
+.quest-item.completed .quest-title { color: #1b5e20; }
+.quest-item.completed .claim-button { background-color: #4caf50; }
+.quest-item.completed .claim-button:hover:not(:disabled) { background-color: #45a049; }
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .daily-quest-popup-content { padding: 20px; max-width: 95%; }
+    .daily-quest-popup-content h2 { font-size: 1.5rem; }
+    .quest-item { padding: 12px 15px; } /* Giữ align-items: center từ quy tắc gốc */
+    .claim-button { padding: 7px 15px; font-size: 0.85rem; min-width: 95px; margin-left: 5px; }
+}
+
+@media (max-width: 480px) {
+    .daily-quest-popup-content { padding: 15px; margin: 15% auto; }
+    .daily-quest-popup-content h2 { font-size: 1.3rem; margin-bottom: 15px; padding-bottom: 10px; }
+    #daily-quest-list { gap: 10px; padding: 10px 2px; }
+    .quest-item {
+        flex-direction: column; /* Xếp chồng */
+        align-items: stretch; /* Kéo dãn */
+    }
+    .quest-info {
+        margin-bottom: 10px;
+        flex-basis: auto;
+        min-width: unset; /* Reset min-width khi là cột */
+    }
+    .claim-button {
+        align-self: center; /* Căn giữa */
+        width: auto;
+        padding: 8px 20px;
+        min-width: 120px;
+        max-width: 90%;
+        margin-left: 0; /* Bỏ margin trái */
+        margin-top: 10px; /* Thêm margin trên */
+    }
+    .quest-title { font-size: 1rem; }
+    /* .quest-description { font-size: 0.8rem; } */
+}

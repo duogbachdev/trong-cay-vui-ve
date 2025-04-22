@@ -1,0 +1,198 @@
+/* ---- Tổng Thể ---- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font nhất quán */
+    margin: 0;
+    padding: 0;
+    background-color: #eef7ff; /* Xanh nhạt hơn chút */
+    color: #343a40; /* Màu chữ tối hơn */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 250px; /* Rộng hơn chút */
+    margin: 25px auto;
+    padding: 25px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 87, 184, 0.1); /* Bóng đổ xanh dương nhẹ */
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 50px); /* Chiều cao tối thiểu trừ margin */
+}
+
+/* ---- Header và Nút ---- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px dashed #90ee90; /* Giống trang game */
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    color: #28a745; /* Xanh lá cây đậm hơn */
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Căn chỉnh các nút bên phải */
+.header > div {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.back-button, .clear-button {
+    padding: 10px 18px; /* To hơn chút */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.back-button {
+    background-color: #6c757d;
+    color: white;
+}
+.back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.clear-button {
+    background-color: #e74c3c; /* Đỏ tươi hơn */
+    color: white;
+}
+.clear-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.clear-button:disabled {
+    background-color: #f5b7b1; /* Đỏ nhạt khi disable */
+    color: #7c2e38;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* ---- Khu Vực Danh Sách Lịch Sử ---- */
+#history-list-container {
+    flex-grow: 1;
+    overflow-y: auto;
+	
+    /* Tùy chỉnh thanh cuộn (Webkit) */
+    scrollbar-width: thin;
+    scrollbar-color: #a0a0a0 #f0f0f0;
+}
+#history-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+#history-list-container::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 4px;
+}
+#history-list-container::-webkit-scrollbar-thumb {
+    background-color: #a0a0a0;
+    border-radius: 4px;
+    border: 2px solid #f0f0f0;
+}
+
+#history-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ---- Mục Lịch Sử ---- */
+.history-entry {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-left: 5px solid #007bff; /* Viền xanh dương mặc định bên trái */
+    border-radius: 6px;
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center; /* Căn giữa icon và text theo chiều dọc */
+    gap: 15px;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.history-entry:hover {
+    background-color: #f8f9fa; /* Sáng hơn chút khi hover */
+}
+
+.history-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    width: 30px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.history-details-time {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* Xếp chồng thời gian và chi tiết */
+}
+
+.history-time {
+    font-size: 0.8rem;
+    color: #6c757d; /* Màu xám cho thời gian */
+    margin-bottom: 4px;
+}
+
+.history-details {
+    color: #495057;
+    word-break: break-word; /* Ngắt chữ nếu chi tiết quá dài */
+}
+
+/* ---- Tùy chỉnh màu viền trái dựa trên loại hành động (ví dụ) ---- */
+.history-entry[data-type="plant"] { border-left-color: #28a745; } /* Xanh lá cho trồng */
+.history-entry[data-type="harvest"] { border-left-color: #ffc107; } /* Vàng cho thu hoạch */
+.history-entry[data-type="sell_direct"],
+.history-entry[data-type="sell_harvested"] { border-left-color: #e8a800; } /* Vàng đậm hơn cho bán */
+.history-entry[data-type="pest"] { border-left-color: #e74c3c; } /* Đỏ cho sâu */
+.history-entry[data-type="fertilize"] { border-left-color: #8B4513; } /* Nâu cho phân bón */
+.history-entry[data-type="clear"] { border-left-color: #6c757d; } /* Xám cho dọn dẹp */
+.history-entry[data-type="buy_item"] { border-left-color: #fd7e14; } /* Cam cho mua đồ */
+.history-entry[data-type="buy_plot"] { border-left-color: #17a2b8; } /* Xanh lam cho mua ô */
+.history-entry[data-type="lightning_strike"] { border-left-color: #ffeb3b; } /* Vàng sáng cho sét */
+.history-entry[data-type="water"] { border-left-color: #007bff; } /* Xanh dương cho tưới nước */
+
+/* ---- Thông báo ---- */
+#history-message {
+    text-align: center;
+    color: #6c757d;
+    padding: 40px 20px;
+    font-size: 1.1rem;
+    font-style: italic;
+    border: 2px dashed #ced4da;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .container { margin: 15px; padding: 20px; }
+    .header h1 { font-size: 1.7rem; }
+    .header { flex-direction: column; align-items: flex-start; gap: 10px; } /* Header xếp chồng trên mobile */
+    .header > div { width: 100%; justify-content: flex-end; } /* Nút căn phải */
+}
+
+@media (max-width: 480px) {
+    .container { margin: 10px; padding: 15px; border-radius: 8px;}
+    .header h1 { font-size: 1.5rem; }
+    .back-button, .clear-button { padding: 8px 12px; font-size: 0.9rem; width: auto; } /* Nút nhỏ lại */
+    .history-entry { padding: 10px 12px; font-size: 0.9rem; gap: 10px; }
+    .history-icon { font-size: 1.3rem; width: 25px;}
+    .history-time { font-size: 0.75rem; }
+    #history-message { font-size: 1rem; padding: 30px 15px; }
+}

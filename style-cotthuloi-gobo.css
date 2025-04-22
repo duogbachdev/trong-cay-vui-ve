@@ -1,0 +1,69 @@
+/* CSS cho Popup Xác Nhận Gỡ Bỏ Cột Thu Lôi */
+.confirm-rod-popup .popup-content { /* Có thể dùng chung class hoặc tạo riêng */
+    background-color: #ffebee; /* Màu nền đỏ nhạt */
+    border: 2px solid #e57373; /* Viền đỏ */
+     max-width: 380px; /* Giới hạn chiều rộng */
+}
+
+.confirm-rod-popup h2 {
+    color: #c62828; /* Màu đỏ đậm */
+    text-align: center;
+     margin-bottom: 15px;
+}
+
+.confirm-rod-popup p {
+    color: #5d4037; /* Màu nâu tối */
+    text-align: center;
+    margin-bottom: 20px;
+     line-height: 1.5;
+}
+
+.confirm-rod-popup .popup-buttons {
+    display: flex;
+    justify-content: space-around; /* Cách đều */
+    margin-top: 10px;
+}
+
+.confirm-rod-popup button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+     min-width: 120px;
+}
+
+.confirm-rod-popup #confirm-remove-rod-btn {
+    background-color: #e53935; /* Màu đỏ */
+    color: white;
+    border: none;
+}
+.confirm-rod-popup #confirm-remove-rod-btn:hover {
+    background-color: #c62828; /* Đỏ đậm hơn */
+     transform: scale(1.03);
+}
+
+.confirm-rod-popup #cancel-remove-rod-btn {
+    background-color: #bdbdbd; /* Màu xám */
+    color: #333;
+    border: none;
+}
+.confirm-rod-popup #cancel-remove-rod-btn:hover {
+    background-color: #9e9e9e; /* Xám đậm hơn */
+}
+/* Nút đóng (X) */
+.confirm-rod-popup .close-popup-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.confirm-rod-popup .close-popup-btn:hover {
+    color: #555;
+}

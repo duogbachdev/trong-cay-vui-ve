@@ -1,0 +1,179 @@
+/* --- START OF FILE style-confirm-hatngoctroi.css --- */
+
+/* Kế thừa một số thuộc tính từ modal chung nếu cần, hoặc định nghĩa lại */
+.reward-popup {
+    /* display: none; */ /* Được điều khiển bởi JS */
+    position: fixed;
+    z-index: 1050; /* Cao hơn các modal khác một chút nếu cần */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.75); /* Tối hơn một chút */
+    animation: fadeInReward 0.4s ease;
+    backdrop-filter: blur(4px); /* Làm mờ nền */
+    display: flex; /* Dùng flex để căn giữa dễ hơn */
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeInReward {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(4px); }
+}
+
+.reward-popup-content {
+    background-color: #f0fff0; /* Honeydew - Màu xanh lá nhạt nhẹ nhàng */
+    margin: auto; /* Tự động căn giữa */
+    padding: 30px 40px; /* Padding lớn hơn chút */
+    border: 2px solid #90ee90; /* LightGreen border */
+    width: 90%;
+    max-width: 420px; /* Giới hạn chiều rộng */
+    border-radius: 15px; /* Bo góc nhiều hơn */
+    box-shadow: 0 10px 35px rgba(76, 175, 80, 0.4); /* Bóng đổ màu xanh lá */
+    position: relative;
+    animation: slideInReward 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các phần tử bên trong */
+    text-align: center; /* Căn giữa text */
+}
+
+@keyframes slideInReward {
+    from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Tiêu đề */
+.reward-popup-content h2 {
+    color: #2e8b57; /* SeaGreen */
+    font-size: 1.8rem; /* To hơn một chút */
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Đoạn văn bản */
+.reward-popup-content p {
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Khu vực hiển thị vật phẩm */
+.reward-item-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Khoảng cách giữa icon và tên */
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.6); /* Nền trắng mờ */
+    border-radius: 10px;
+    border: 1px dashed #90ee90;
+}
+
+.reward-item-icon {
+    display: inline-block; /* Hoặc flex nếu cần căn chỉnh phức tạp hơn */
+    padding: 5px;
+    background-color: rgba(144, 238, 144, 0.3); /* Nền xanh lá rất nhạt */
+    border-radius: 50%; /* Bo tròn nếu muốn */
+}
+
+#reward-item-image {
+    display: block; /* Loại bỏ khoảng trắng thừa */
+    max-width: 70px; /* Tăng kích thước ảnh */
+    max-height: 70px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng nhẹ khi hover vào icon */
+.reward-item-display:hover #reward-item-image {
+    transform: scale(1.1) rotate(5deg);
+}
+
+#reward-item-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #3b7554; /* Xanh đậm */
+}
+
+/* Khu vực nút */
+.reward-popup-buttons {
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Căn giữa nút */
+}
+
+#confirm-reward-btn {
+    background-color: #ffb300; /* Vàng cam giống nút bán */
+    color: #333; /* Chữ đen/xám đậm */
+    font-weight: bold;
+    padding: 12px 30px; /* Padding lớn */
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase; /* Viết hoa */
+    letter-spacing: 0.5px;
+}
+
+#confirm-reward-btn:hover:not(:disabled) {
+    background-color: #ffa000; /* Vàng cam đậm hơn */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+#confirm-reward-btn:active:not(:disabled) {
+    background-color: #ff8f00; /* Vàng cam đậm nhất */
+    transform: translateY(0px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive (điều chỉnh nếu cần) */
+@media (max-width: 600px) {
+    .reward-popup-content {
+        padding: 25px 20px;
+        max-width: 90%;
+    }
+    .reward-popup-content h2 {
+        font-size: 1.5rem;
+    }
+    .reward-popup-content p {
+        font-size: 0.9rem;
+    }
+    #reward-item-image {
+        max-width: 60px;
+        max-height: 60px;
+    }
+    #reward-item-name {
+        font-size: 1rem;
+    }
+    #confirm-reward-btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .reward-popup-content {
+        padding: 20px 15px;
+    }
+     .reward-popup-content h2 {
+        font-size: 1.3rem;
+    }
+    .reward-popup-content p {
+        font-size: 0.85rem;
+    }
+    #confirm-reward-btn {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* --- END OF FILE style-confirm-hatngoctroi.css --- */

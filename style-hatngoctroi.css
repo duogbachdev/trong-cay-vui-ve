@@ -1,0 +1,110 @@
+/* --- style-hatngoctroi.css --- */
+
+/* Kế thừa một số kiểu từ modal chung nếu muốn */
+#hat-ngoc-troi-popup .hat-ngoc-troi-content {
+    background: linear-gradient(145deg, #f0f8ff, #e6f7ff); /* Màu nền AliceBlue/LightCyan gradient */
+    margin: 15% auto; /* Căn giữa và cách top */
+    padding: 30px;
+    border: 3px solid #87cefa; /* Viền LightSkyBlue */
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px; /* Giới hạn chiều rộng */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 15px rgba(135, 206, 250, 0.5); /* Bóng đổ và hiệu ứng sáng */
+    position: relative;
+    text-align: center;
+    color: #333;
+    animation: popupSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes popupSlideIn {
+    from { transform: translateY(-50px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+#hat-ngoc-troi-popup .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#hat-ngoc-troi-popup .close-button:hover,
+#hat-ngoc-troi-popup .close-button:focus {
+    color: #555;
+    transform: rotate(90deg);
+}
+
+#hat-ngoc-troi-popup h2 {
+    color: #4682b4; /* SteelBlue */
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#hat-ngoc-troi-popup .hat-ngoc-troi-icon {
+    font-size: 3rem; /* Kích thước icon lớn */
+    margin-bottom: 15px;
+    animation: bounceIcon 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#hat-ngoc-troi-popup p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    color: #555;
+}
+
+#hat-ngoc-troi-popup .hat-ngoc-troi-buttons button {
+    background-color: #87cefa; /* LightSkyBlue */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#hat-ngoc-troi-popup .hat-ngoc-troi-buttons button:hover {
+    background-color: #77bce8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+#hat-ngoc-troi-popup .hat-ngoc-troi-buttons button:active {
+    background-color: #6caedb;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive cho màn hình nhỏ hơn */
+@media (max-width: 600px) {
+    #hat-ngoc-troi-popup .hat-ngoc-troi-content {
+        margin: 20% auto;
+        padding: 20px;
+        max-width: 90%;
+    }
+    #hat-ngoc-troi-popup h2 {
+        font-size: 1.5rem;
+    }
+    #hat-ngoc-troi-popup .hat-ngoc-troi-icon {
+        font-size: 2.5rem;
+    }
+    #hat-ngoc-troi-popup p {
+        font-size: 0.9rem;
+    }
+    #hat-ngoc-troi-popup .hat-ngoc-troi-buttons button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}

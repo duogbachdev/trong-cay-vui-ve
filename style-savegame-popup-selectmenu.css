@@ -1,0 +1,138 @@
+/* --- style-savegame-popup-selectmenu.css --- */
+
+/* Kế thừa style modal cơ bản nếu #menu-savegame-popup có class="modal" */
+#menu-savegame-popup {
+    /* Đảm bảo nó hiển thị trên menu chính nếu menu còn mở */
+    z-index: 1006;
+    backdrop-filter: blur(2px); /* Thêm hiệu ứng mờ nhẹ cho nền */
+}
+
+.savegame-popup-content {
+    background-color: #f8f9fa; /* Màu nền sáng, sạch sẽ */
+    margin: 18% auto; /* Căn giữa và cách top nhiều hơn chút */
+    padding: 30px 35px;
+    border: 1px solid #ced4da; /* Viền nhẹ */
+    width: 90%;
+    max-width: 400px; /* Giới hạn chiều rộng */
+    border-radius: 12px; /* Bo góc mềm mại hơn */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Bóng đổ rõ hơn */
+    position: relative;
+    text-align: center; /* Căn giữa các phần tử bên trong */
+    animation: fadeInScale 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Hiệu ứng xuất hiện */
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Style nút đóng (có thể kế thừa từ style chung .close-button nếu có) */
+.savegame-popup-content .close-button {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    color: #adb5bd; /* Màu xám nhạt hơn */
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.savegame-popup-content .close-button:hover {
+    color: #495057; /* Đậm hơn khi hover */
+    transform: rotate(90deg);
+}
+
+/* Tiêu đề */
+.savegame-popup-content h2 {
+    color: #343a40; /* Màu văn bản đậm */
+    margin-bottom: 30px; /* Tăng khoảng cách dưới tiêu đề */
+    font-size: 1.6rem; /* To hơn chút */
+    font-weight: 600; /* Đậm hơn */
+}
+
+/* Container cho các nút */
+.savegame-buttons {
+    display: flex;
+    flex-direction: column; /* Xếp chồng các nút */
+    gap: 18px; /* Khoảng cách lớn hơn giữa các nút */
+}
+
+/* Kiểu nút chung trong popup này */
+.savegame-action-button {
+    border: none;
+    color: white;
+    padding: 14px 22px; /* Padding lớn hơn */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.05rem; /* Cỡ chữ to hơn */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12); /* Bóng đổ nhẹ */
+    font-weight: 500;
+    letter-spacing: 0.5px; /* Giãn chữ nhẹ */
+}
+
+.savegame-action-button:hover:not(:disabled) {
+    opacity: 0.95; /* Ít mờ hơn khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.18);
+    transform: translateY(-2px); /* Hiệu ứng nổi lên rõ hơn */
+}
+
+.savegame-action-button:active:not(:disabled) {
+    transform: scale(0.97) translateY(0px); /* Nhấn sâu hơn */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.savegame-action-button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Kiểu nút Lưu (Xanh lá) */
+#btn-savegame {
+    background-color: #28a745; /* Bootstrap success green */
+}
+#btn-savegame:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+/* Kiểu nút Nhập (Xanh dương) */
+#btn-import-savegame {
+    background-color: #007bff; /* Bootstrap primary blue */
+}
+#btn-import-savegame:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .savegame-popup-content {
+        padding: 25px;
+        margin: 25% auto; /* Giảm cách top trên mobile */
+        max-width: 88%;
+    }
+    .savegame-popup-content h2 {
+        font-size: 1.4rem;
+        margin-bottom: 25px;
+    }
+    .savegame-action-button {
+        padding: 12px 18px;
+        font-size: 1rem;
+    }
+    .savegame-buttons {
+        gap: 15px;
+    }
+}

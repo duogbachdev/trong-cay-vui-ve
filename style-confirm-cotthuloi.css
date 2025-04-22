@@ -1,0 +1,75 @@
+/* CSS cho Popup Xác Nhận Sửa Chữa Cột Thu Lôi */
+.confirm-rod-popup .popup-content {
+    background-color: #fff3e0; /* Màu nền cam nhạt */
+    border: 2px solid #ffb74d; /* Viền cam */
+    max-width: 380px; /* Giới hạn chiều rộng */
+}
+
+.confirm-rod-popup h2 {
+    color: #e65100; /* Màu cam đậm */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.confirm-rod-popup p {
+    color: #4e342e; /* Màu nâu tối */
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.confirm-rod-popup .popup-buttons {
+    display: flex;
+    justify-content: space-around; /* Cách đều */
+    margin-top: 10px;
+}
+
+.confirm-rod-popup button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+    min-width: 120px;
+}
+
+.confirm-rod-popup #confirm-repair-rod-btn {
+    background-color: #fb8c00; /* Màu cam */
+    color: white;
+    border: none;
+}
+ .confirm-rod-popup #confirm-repair-rod-btn:hover:not(:disabled) {
+    background-color: #f57c00; /* Cam đậm hơn */
+    transform: scale(1.03);
+}
+ .confirm-rod-popup #confirm-repair-rod-btn:disabled {
+    background-color: #ffe0b2; /* Cam rất nhạt */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.confirm-rod-popup #cancel-repair-rod-btn {
+    background-color: #bdbdbd; /* Màu xám */
+    color: #333;
+    border: none;
+}
+.confirm-rod-popup #cancel-repair-rod-btn:hover {
+    background-color: #9e9e9e; /* Xám đậm hơn */
+}
+
+/* Nút đóng (X) */
+.confirm-rod-popup .close-popup-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 24px;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+}
+.confirm-rod-popup .close-popup-btn:hover {
+    color: #555;
+}
